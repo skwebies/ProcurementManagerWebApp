@@ -1,0 +1,64 @@
+﻿@model Procurement
+@{
+
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title" id="gridSystemModalLabel">Deleting Procurement</h2>
+
+        <h3 class="alert alert-danger">Are you sure you want to <span class="text-danger">delete</span> this?</h3>
+    </div>
+    <div class="modal-body">
+        <ul class="list-group">
+            <li class="list-group-item"><span class="text-danger">Service Procured:</span> @Model.Service_Procured</li>
+            <li class="list-group-item"><span class="text-danger">Response Evaluation:</span> @Model.Response_Evaluation</li>
+            <li class="list-group-item"><span class="text-danger">Company:</span> @Model.Company.Company_Name</li>
+            <li class="list-group-item"><span class="text-danger">Note:</span> @Model.Note</li>
+            <li class="list-group-item"><h4 class="list-group-item-heading">Related Questions</h4></li>
+            @foreach (var q in Model.Questions)
+            {
+                <li class="list-group-item list-group-item-warning">@q.question</li>
+
+            }
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <form asp-action="DeleteProcurement" asp-controller="Procurements" asp-route-id="@Model.Procurement_Id" asp-antiforgery="true">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-success">Back To List</a>
+            <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+@*
+    <!--Bootstrap Modal Window for delete action-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="DeletePro">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Delete Procurement</h4>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+*@

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Question>
+
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Question</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Question_Number</td>
+                    <td>@item.question</td>
+                    <td>@item.QuestionType.Question_Type</td>
+                </tr>
+
+            }
+        </table>
+

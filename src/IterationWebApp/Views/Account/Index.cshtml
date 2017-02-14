@@ -1,0 +1,74 @@
+﻿@model List<DisplayUserViewModel>
+
+@{
+    ViewBag.Title = "User Page";
+} 
+<div class="row">
+    <div class="col-sm-2">
+        <h2>User Manager</h2>
+    </div>
+</div>
+
+@if (TempData["success"] != null)
+            {
+    <div class="row">
+        <div class="col-md-5 msg-success">
+            <h3 class="label label-success">@TempData["success"]</h3>
+        </div>
+    </div>
+
+}
+else if (TempData["Delete"] != null)
+{
+    <div class="row">
+        <div class="col-md-5 msg-delete">
+            <h3 class="label label-success">@TempData["Delete"]</h3>
+        </div>
+    </div>
+
+}
+
+    <div class="row">
+       
+        <div class="col-md-5">
+            
+            <ul class="list-group">
+               
+
+                @if (User.IsSignedIn())
+                {
+                    <li class="list-group-item">
+                        <i class="glyphicon glyphicon-user"></i>
+
+                        Logged in user: <span class="text-info">
+                            <strong>@User.GetUserName()</strong>
+                            <a asp-action="ResetPassword" asp-controller="Account" asp-route-email="@User.GetUserName()" class="btn btn-sm btn-danger">Reset Password</a>
+                        </span>
+                    </li>
+
+
+                    @foreach (var user in Model)
+                    {
+                        if (user.Email != User.Identity.Name)
+                        {
+                            
+                            <li class="list-group-item">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span class="text-muted"> @user.Email</span>
+                                <a asp-action="ResetPassword" asp-controller="Account" asp-route-email ="@user.Email" class="btn btn-sm btn-default pull-right reset-btn"> Reset Password</a>
+                                <a asp-action="Delete" asp-controller="Account" asp-route-id="@user.Id"><i class="glyphicon glyphicon-trash"></i></a>
+                            </li>
+
+                        }
+
+
+
+                    }
+
+                }
+
+
+            </ul>
+
+        </div>
+    </div>

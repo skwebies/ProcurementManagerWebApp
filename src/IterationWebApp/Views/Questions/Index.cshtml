@@ -1,0 +1,183 @@
+﻿@model IEnumerable<Question>
+<div class="row">
+    <div class="col-md-4 col-sm-6">
+
+
+        <p class="page-header text-uppercase" style="font-size:28px; line-height:28px;">Questions <a asp-controller="Questions" asp-action="Create" class="btn btn-sm btn-danger"><i class="fa fa-plus"></i> Add Questions</a> <a data-toggle="modal" data-target="#CreateQtype" class="btn btn-sm btn-danger"><i class="fa fa-plus"></i> Add Question Types</a></p>
+    </div>
+</div>
+
+<div class="row" style="margin-top:20px; padding-bottom:20px;">
+    <!--<div class="row" style="padding-bottom:10px;">-->
+
+    <div class="col-md-3 col-sm-12">
+        <!--Search By Service Procured-->
+        <form asp-controller="Questions" asp-action="Index" method="get" class="form-inline" role="search">
+            <div class="input-group form-group">
+                <input type="text" placeholder="Search by" name="keyword1" class="form-control" />
+                <span name="keyword1"></span>
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Question" class="btn btn-sm btn-success" />
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+        <!--search by Questions-->
+        <form asp-controller="Questions" asp-action="Index" method="get" class="form-inline" role="search">
+            <div class="input-group form-group">
+                <input type="text" placeholder="Search by" name="keyword2" class="form-control" />
+                <span name="keyword2"></span>
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Procurement" class="btn btn-sm btn-success" />
+            </div>
+        </form>
+    </div>
+
+    <!-- </div><!--end of nested row-->
+    <!--<div class="row" style="padding-bottom:10px;">-->
+    <div class="col-md-3 col-sm-12">
+        <!--search by response-->
+        <form asp-controller="Questions" asp-action="Index" method="get" class="form-inline" role="search">
+
+            <div class="input-group form-group">
+                <input type="text" placeholder="Search by" name="keyword3" class="form-control" />
+                <span name="keyword3"></span>
+
+
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Review Score" class="btn btn-sm btn-success" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3 col-sm-12">
+        <!--search by response-->
+        <form asp-controller="Questions" asp-action="Index" method="get" class="form-inline" role="search">
+
+            <div class="input-group form-group">
+                <input type="text" placeholder="Search by" name="keyword4" class="form-control" />
+                <span name="keyword4"></span>
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Winning Response" class="btn btn-sm btn-success" />
+            </div>
+
+        </form>
+    </div>
+    <!---</div><!--end of nested row-->
+</div><!--end of row-->
+
+<div class="container-fluid">
+    <!--Table of questions starts here-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Question and Responses
+            </div>
+            <div class="panel-body">
+                
+                <table class="table table-responsive table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Question No.</th>
+                            <th>Questions</th>
+                            <th>Iteration Response</th>
+                            <th>Review Score Iteration</th>
+                            <th>Winning Response</th>
+                            <th>Review Score Winning Company</th>
+                            <th>Procurement</th>
+                            @*<th>Question Types</th>
+                                <th>Note</th>*@
+                            <th>Documents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+            {
+                            <tr>
+                                <td>@item.Question_Number</td>
+                                <td>@item.question</td>
+                                <td>@item.Iteration_Response</td>
+                                <td>@item.Review_Score_Iteration</td>
+                                <td>@item.Winning_Response</td>
+                                <td>@item.Review_Score_Winning_Company</td>
+                                <td>@item.Procurement.Service_Procured</td>
+                                @*<td>@item.QuestionType.Question_Type</td>
+                                    <td><p class="label label-info">@item.Note</p></td>*@
+
+                                @if (item.Documents.Length > 0)
+                                {
+                                    <td><a href="@item.Documents" class="btn btn-sm btn-success" title="Open File" target="_blank"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                    
+
+                                        }else{
+                                <td class="text-warning">Not Found!</td>
+                                        }
+                                        
+                                        <td><a asp-action="DeleteQuestion" asp-controller="Questions" asp-route-id="@item.Question_Id" class="btn btn-sm btn-success" title="Delete" data-toggle="modal" data-target="#DeleteQues" data-rel="dialog"><i class="glyphicon glyphicon-trash"></i></a>
+                                        <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.Question_Id" class="btn btn-sm btn-success" title="Edit" style="margin-bottom:5px;" data-target="#EditQues" data-toggle="modal" data-rel="dialog"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    </td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!--end of row-->
+    <!--Partial View Generation For DeleteQuestion-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="DeleteQues" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+
+                </div>
+
+            </div>
+
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+    <!--Partial View Generation For Edit Question page-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="EditQues" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+
+                </div>
+
+            </div>
+
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+</div>
+
+<div class="modal fade" id="CreateQtype" tabindex="-1" role="dialog" aria-labelledby="createQtype" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createQtype">Add Question Type</h4>
+            </div>
+            <div class="modal-body">
+
+                @{
+                    await Html.RenderPartialAsync("_AddQuestionType", new CreateQuestionTypeViewModel());
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

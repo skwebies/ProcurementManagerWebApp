@@ -1,0 +1,10 @@
+﻿@model EditProcurementViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Iteration AB - Procurement Edit";
+}
+
+
+@{
+    await Html.RenderPartialAsync("_EditProcurement", Model);
+}

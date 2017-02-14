@@ -1,0 +1,63 @@
+﻿@model Question
+@{
+
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title" id="gridSystemModalLabel">Deleting Questions</h2>
+
+        <h3 class="alert alert-danger">Are you sure you want to <span class="text-danger">delete</span> this?</h3>
+    </div>
+    <div class="modal-body">
+        <ul class="list-group">
+            <li class="list-group-item"><span class="text-danger">Question Title:</span> @Model.question</li>
+            <li class="list-group-item"><span class="text-danger">Iteration Response:</span> @Model.Iteration_Response</li>
+            @*<li class="list-group-item"><span class="text-danger">Procurement:</span> @Model.Procurement.Service_Procured</li>*@
+            <li class="list-group-item"><span class="text-danger">Review Score:</span> @Model.Review_Score_Iteration</li>
+            <li class="list-group-item"><span class="text-danger">Winning Response:</span> @Model.Winning_Response</li>
+            <li class="list-group-item"><span class="text-danger">Winning Company:</span> @Model.Review_Score_Winning_Company</li>
+            <li class="list-group-item"><span class="text-danger">Note:</span> @Model.Note</li>
+
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <form asp-action="DeleteQuestion" asp-controller="Questions" asp-route-id="@Model.Question_Id" asp-antiforgery="true">
+            <a asp-action="Index" asp-controller="Questions" class="btn btn-success">Back To List</a>
+            <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+@*
+    <!--Bootstrap Modal Window for delete action-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="DeletePro">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Delete Procurement</h4>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+*@

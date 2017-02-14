@@ -1,0 +1,141 @@
+﻿html {
+    margin: 0;
+}
+
+body {
+    background: #F1F1F1;
+    margin: 0;
+}
+
+.navbar-default {
+    margin-top: 10px;
+    background: #AC553F;
+}
+
+    .navbar-default .navbar-brand {
+        color: white;
+        font-weight: bold;
+        font-size: 28px;
+    }
+
+        .navbar-default .navbar-brand:hover {
+            color: white;
+            font-weight: bold;
+        }
+
+    .navbar-default .navbar-nav > li > a {
+        color: white;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: white;
+    }
+
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+        background-color: #db674a;
+    }
+
+.cust_container {
+    margin-top: 200px;
+}
+
+.login_header {
+    color: #a9a9a9;
+}
+
+.login_logo {
+    display: block;
+    margin-left: -90px;
+}
+
+.btn-success {
+    background-color: #db674a;
+    border-color: #AC553F;
+    
+}
+.login-btn{
+   margin-left:-5px; 
+}
+.msg-success, .msg-delete {
+    margin-bottom:10px;
+}
+
+    .btn-success:hover, .btn-success:active, .btn-success:focus {
+        background-color: #AC553F !important;
+        border-color: #AC553F;
+    }
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    color: white;
+    background-color: #db674a;
+}
+
+.navBg {
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+    border: none;
+}
+
+.searchBlocks {
+    margin-bottom: 10px;
+}
+
+.proInfo {
+    padding-bottom: 10px !important;
+}
+
+#site_header {
+    margin-top: 100px;
+}
+
+.button-nav {
+    padding-bottom: 20px;
+}
+
+a.CreateAccountLink, a.CreateAccountLink:active, a.CreateAccountLink:hover, a.CreateAccountLink:visited {
+    border: none;
+}
+
+.detail_records {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+h2 {
+    color: #db674a;
+    font-size:26px;
+    padding:10px;
+    background:white;
+    border-radius:5px;
+    margin-bottom:10px;
+    display:block;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.reset-btn {
+    margin-top:-5px;
+    background:#db674a;
+    color:white;
+}
+.reset-btn:hover, .reset-btn:active, .reset-btn:focus {
+    background:#AC553F;
+    color:white;
+}
+.logout-btn:hover {
+    background:#ff6a00!important;
+}
+
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    h2 {
+        font-size: 1.5em;
+        color: #db674a;
+    }
+}
+
+
+/* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+
+    }

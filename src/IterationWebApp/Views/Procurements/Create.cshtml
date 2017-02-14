@@ -1,0 +1,96 @@
+﻿@model CreateProcurementViewModel
+
+@{
+    ViewBag.Title = "Iteration AB - Add Procurement";
+}
+
+@*<div class="row button-nav">
+        <div class="col-md-1">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-primary">Back</a>
+        </div>
+
+    </div>*@
+
+<div class="col-sm-12">
+    <div class="col-md-2 col-sm-offset-2">
+        <h2 class="text-capitalize">Add Procurement</h2>
+    </div>
+</div>
+
+
+<div class="col-sm-12">
+    <form asp-controller="Procurements" asp-action="Create" class="form-horizontal" asp-antiforgery="true">
+
+        <div class="form-group">
+
+            <label asp-for="Service_Procured" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Service_Procured" class="form-control" />
+                <span asp-validation-for="Service_Procured" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Response_Evaluation" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Response_Evaluation" class="form-control" />
+                <span asp-validation-for="Response_Evaluation" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Note" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="Company.Company_Name" class="col-sm-2 control-label"></label>
+                <div class="col-sm-3">
+                    <input asp-for="Company.Company_Name" class="form-control" />
+                    <input type="hidden" asp-for="Company.Company_Id" />
+                    <span asp-validation-for="Company.Company_Name" class="text-danger"></span>
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <label asp-for="SelectedCompanyID" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedCompanyID" class="form-control" asp-items="Model.Companies">
+                    <option id="select" value="">Select Company</option>
+
+                </select>
+
+                <span asp-validation-for="SelectedCompanyID" class="text-danger"></span>
+            </div>
+            <div class="col-sm-3">
+                <a data-toggle="modal" data-target="#CreateCompany" class="btn btn-success">Add Company</a>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Add" class="btn btn-success" />
+            </div>
+        </div>
+    </form>
+</div><!--end of row-->
+
+<div class="modal fade" id="CreateCompany" tabindex="-1" role="dialog" aria-labelledby="createCompany" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createCompany">Add Company</h4>
+            </div>
+            <div class="modal-body">
+
+                @{
+                    await Html.RenderPartialAsync("_AddCompany", new CreateCompanyViewModel());
+                }
+                
+            </div>
+        </div>
+    </div>
+</div>

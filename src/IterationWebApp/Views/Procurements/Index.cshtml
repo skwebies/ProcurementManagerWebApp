@@ -1,0 +1,270 @@
+﻿@model IEnumerable<Procurement>
+
+@{
+    ViewBag.Title = "Iteration AB - Procurements";
+}
+
+@*@model List<DisplayProcurementViewModel>*@
+<div class="row">
+    <div class="col-sm-4">
+        
+        @*@Html.ActionLink("PDF", "ExportTo", new { ReportType ="PDF"})
+            @Html.ActionLink("Excel", "ExportTo", new { ReportType = "Excel"})*@
+        <p class="page-header text-uppercase" style="font-size:28px;">Procurements   <a asp-controller="Procurements" asp-action="Create" class="btn btn-sm btn-danger"><i class="fa fa-plus"></i> Add Procurement</a></p>
+        
+    </div>
+   
+
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        @if (TempData["success"] != null)
+        {   <script>
+            $(document).ready(function () {
+
+                alert('@TempData["success"]');
+
+            });
+
+            </script>
+            @*<p class="text-success">@TempData["success"]</p>*@
+
+        }
+    </div>
+
+</div>
+<!--starts search forms-->
+<div class="row" style="padding-bottom:20px;">
+
+    <div class="col-sm-3">
+        <form asp-controller="Procurements" asp-action="Index" method="get" class="form-inline" role="search">
+
+            <!--search by company-->
+            <div class="input-group form-group">
+                <input type="text" placeholder="company name" name="keyword2" class="form-control" size="20" />
+                <span name="keyword2"></span>
+
+
+            </div>
+            <div class="input-group">
+                <input name="keyword2" type="submit" value="Search By Company" class="btn btn-sm btn-success" />
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-3">
+        <!--Search By Service Procured-->
+        <form asp-controller="Procurements" asp-action="Index" method="get" class="form-inline" role="search">
+            <!--search by procurement-->
+            <div class="input-group form-group">
+                <input type="text" placeholder="service procured" name="keyword" class="form-control" size="20" />
+
+                <span name="keyword"></span>
+
+
+            </div>
+            <div class="input-group">
+                <input name="keyword" type="submit" value="Search By Procurement" class="btn btn-sm btn-success" />
+            </div>
+
+        </form>
+    </div>
+
+
+
+    <div class="col-sm-3">
+        <form asp-controller="Procurements" asp-action="Index" method="get" class="form-inline" role="search">
+            <!--search by response-->
+            <div class="input-group form-group">
+                <input type="text" placeholder="Response" name="keyword3" class="form-control" size="20" />
+                <span name="keyword3"></span>
+
+
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Search By Response" class="btn btn-sm btn-success" />
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-3">
+        <form asp-controller="Procurements" asp-action="Index" method="get" class="form-inline" role="search">
+            <!--DateTime Picker filter-->
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' class="form-control" placeholder="Search by Date and time" name="datetimepicker2" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Search By Date" class="btn btn-sm btn-success" />
+            </div>
+        </form>
+    </div>
+    @if (TempData["error"] != null)
+    {
+        <p class="text-danger">@TempData["error"]</p>
+    }
+</div><!--end row-->
+
+<!--end of search forms-->
+<!--Starts Procurements List Table-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Procured services by company</div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+
+                                @Html.ActionLink("Company Name", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Company_Name", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                                @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Response_Evaluation" || ViewBag.SortBy == "Date_Of_Submission")
+                                {
+                                    <i class="glyphicon glyphicon-sort"></i>
+                                }
+
+                                @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Company_Name")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+                                @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Company_Name")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+                            </th>
+
+                            <th>
+                                @Html.ActionLink("Service Procured", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Service_Procured", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                                @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Response_Evaluation" || ViewBag.SortBy == "Date_Of_Submission")
+                                {
+                                    <i class="glyphicon glyphicon-sort"></i>
+                                }
+
+                                @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Service_Procured")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+                                @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Service_Procured")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+
+
+
+                            </th>
+                            <th class="visible-lg">
+                                @Html.ActionLink("Response Evaluation", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Response_Evaluation", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                                @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Date_Of_Submission")
+                                {
+                                    <i class="glyphicon glyphicon-sort"></i>
+                                }
+
+                                @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Response_Evaluation")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+                                @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Response_Evaluation")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+                            </th>
+                            <th class="visible-lg">
+                                @Html.ActionLink("Date Of Submission", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Date_Of_Submission", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                                @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Response_Evaluation")
+                                {
+                                    <i class="glyphicon glyphicon-sort"></i>
+                                }
+
+                                @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Date_Of_Submission")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+                                @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Date_Of_Submission")
+                                {
+                                    <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                                }
+                            </th>
+                            <th>
+                                
+                                <a href="#">Modified Date</a>
+                            </th>
+                            <th class="visible-lg"><a>Note</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Company.Company_Name</td>
+                                <td>@item.Service_Procured</td>
+                                <td class="visible-lg">@item.Response_Evaluation</td>
+                                <td class="visible-lg">@item.PublishedDate</td>
+                                <td class="visible-lg">@item.ModifiedDate</td>
+                                <td class="visible-lg"><p class="bg-info text-justify text-center">@item.Note</p></td>
+                                
+
+                            </tr>
+
+                        }
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+    </div><!--end of row-->
+    <!--Pagination Starts-->
+    <nav>
+        <ul class="pagination">
+            <li>
+                @if (ViewBag.HasPreviousPage == true)
+                {
+
+                    <a href="@Url.Action("Index", new {Page = ViewBag.PreviousPage })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                }
+
+
+            </li>
+            @{
+                double totalPages = ViewBag.TotalPages;
+
+            }
+            @for (int i = 1; i < totalPages; i++)
+            {
+
+                <li>@Html.ActionLink(i.ToString() + " ", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder), SortBy = (ViewBag.SortBy == null ? "Company_Name" : ViewBag.SortBy), Page = i })</li>
+
+
+            }
+
+            <li>
+                @if (ViewBag.HasNextPage == true)
+                {
+                    <a href="@Url.Action("Index", new {Page = ViewBag.NextPage })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                }
+            </li>
+        </ul>
+    </nav>
+
+
+</div>
+<!--End Procurements List Table-->

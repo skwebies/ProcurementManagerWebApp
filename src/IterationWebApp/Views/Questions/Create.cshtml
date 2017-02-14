@@ -1,0 +1,132 @@
+﻿@model CreateQuestionViewModel
+<div class="col-sm-12">
+    <div class="col-sm-2 col-sm-offset-2">
+        <h2 class="text-uppercase">Add Question</h2>
+
+    </div>
+
+</div>
+
+<div class="col-sm-12">
+
+    <form asp-controller="Questions" asp-action="Create" class="form-horizontal" method="post" enctype="multipart/form-data" asp-antiforgery="true">
+
+        <div class="form-group">
+
+            <label asp-for="Question_Number" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Question_Number" class="form-control" />
+                <span asp-validation-for="Question_Number" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="question" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="question" class="form-control" />
+                <span asp-validation-for="question" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Iteration_Response" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Iteration_Response" class="form-control" />
+                <span asp-validation-for="Iteration_Response" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Review_Score_Iteration" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Review_Score_Iteration" class="form-control" />
+                <span asp-validation-for="Review_Score_Iteration" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Winning_Response" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Winning_Response" class="form-control" />
+                <span asp-validation-for="Winning_Response" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Review_Score_Winning_Company" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Review_Score_Winning_Company" class="form-control" />
+                <span asp-validation-for="Review_Score_Winning_Company" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Note" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedProcurementID" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedProcurementID" class="form-control" asp-items="Model.Procurements">
+
+                    <option id="select" value="">Select Procurement</option>
+                </select>
+                
+                <span asp-validation-for="SelectedProcurementID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedQuestionTypeID" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <select asp-for="SelectedQuestionTypeID" class="form-control" asp-items="Model.QuestionTypes">
+
+                    <option id="select" value="">Select Question Type</option>
+                </select>
+               
+
+
+
+                <span asp-validation-for="SelectedQuestionTypeID" class="text-danger"></span>
+            </div>
+            <div class="col-sm-3">
+                <a  data-toggle="modal" data-target="#CreateQtype" data-keyboard="false" data-backdrop="static" class="btn btn-success">Add Question Type</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Files" class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <input type="file" asp-for="Files" name="Files" id="Files" multiple />
+                <span asp-validation-for="Files" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Add" class="btn btn-success" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="modal fade" id="CreateQtype" tabindex="-1" role="dialog" aria-labelledby="createQtype" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createQtype">Add Question Type</h4>
+            </div>
+            <div class="modal-body">
+
+               @{
+                   await Html.RenderPartialAsync("_AddQuestionType", new CreateQuestionTypeViewModel());
+            } 
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="SHORTCUT ICON" href="~/favicon-96x96.png" />
+    <link href="~/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="~/styles/site.css" rel="stylesheet" />
+
+</head>
+@*<cache enabled="true" expires-after="@TimeSpan.FromMinutes(10)">
+    @{ System.Threading.Thread.Sleep(3000); }
+    </cache>*@
+<body>
+    <div class="container-fluid">
+        <!-- <div class="row">-->
+        @if (User.IsSignedIn())
+        {
+            <nav class="navbar navbar-default navbar-static-top navBg">
+                <div class="container-fluid">
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+
+                            <img src="~/images/iteration_logo.png" width="152" style="background:#ffffff; padding:10px; margin-top:-15px; margin-left:-15px;" />
+                        </a>
+
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+                        <ul class="nav navbar-nav">
+
+                            <li><a asp-controller="Home" asp-action="Index"><i class="glyphicon glyphicon-home"></i> Home<span class="sr-only">(current)</span></a></li>
+
+                            <li><a asp-controller="Procurements" asp-action="Index"><i class="glyphicon glyphicon-list"></i> Procurements</a></li>
+                            <li><a asp-controller="Questions" asp-action="Index"><i class="glyphicon glyphicon-question-sign"></i> Questions</a></li>
+                            <li><a asp-controller="QuestionTypes" asp-action="Index"><i class="glyphicon glyphicon-star-empty"></i> Question Types</a></li>
+                            <li>
+
+                                <a data-toggle="modal" data-target="#UserRegister" href="#" class="CreateAccountLink"><i class="glyphicon glyphicon-user"></i> Create Account</a>
+
+
+                            </li>
+
+                        </ul>
+
+                        <form asp-controller="Account" asp-action="Logout" class="navbar-form navbar-right">
+                            <span style="color:#ffffff;">User: @User.GetUserName()</span>
+                            <input type="submit" value="Logout" class="btn btn-success logout-btn">
+                            <div class="btn-group in">
+                                <a class="btn btn-danger" asp-controller="Account" asp-action="Index" title="Manage Users"><i class="fa fa-user fa-fw"></i> User</a>
+                                <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span class="fa fa-caret-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Account" asp-action="Index"><i class="fa fa-pencil fa-fw"></i>View</a></li>
+                                    @*<li><a href="#"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
+                                        <li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><i class="i"></i> Make admin</a></li>*@
+                                </ul>
+                            </div>
+                        </form>
+
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+
+        }
+
+        <!--</div>end row-->
+        <div class="container-fluid">
+            <div class="row">
+                @RenderBody()
+                @{
+                    await Html.RenderPartialAsync("_UserRegistrationForm", new RegisterUserViewModel());
+
+                }
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    
+
+    <script src="~/scripts/jquery.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/moment/moment.js"></script>
+    <script src="~/moment/locale/sv.js"></script>
+    <script src="~/styles/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+
+    <script src="~/scripts/custom.js"></script>
+
+
+    @RenderSection("scripts", false)
+
+    <footer class="navbar-fixed-bottom">
+        <div>
+            <p class="text-info text-right text-center"><i class="glyphicon glyphicon-copyright-mark"></i> @DateTime.Now.Year.ToString() <a href="http://91.189.44.144/iteration/" target="_blank" style="color:#AC553F; text-decoration:none;">Iteration AB.</a> All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+
+
+
+
+
+
+</html>

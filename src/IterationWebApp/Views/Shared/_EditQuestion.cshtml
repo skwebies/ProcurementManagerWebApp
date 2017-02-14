@@ -1,0 +1,120 @@
+﻿@model EditQuestionViewModel
+@*<div class="row">
+        <div class="col-sm-2 col-sm-offset-2">
+            <h2 class="text-uppercase">Edit Question</h2>
+
+        </div>
+
+    </div>*@
+<form asp-controller="Questions" asp-action="Edit" class="form-horizontal" method="post" enctype="multipart/form-data" asp-antiforgery="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title" id="gridSystemModalLabel">Edit Questions</h2>
+
+
+        </div>
+        <div class="modal-body">
+
+            <input type="hidden" asp-for="Question_Id" />
+            @*<input type="Text" asp-for="FileUrl" />*@
+
+            <div class="form-group">
+
+                <label asp-for="Question_Number" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input asp-for="Question_Number" class="form-control" />
+                    <span asp-validation-for="Question_Number" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="question" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input asp-for="question" class="form-control" />
+                    <span asp-validation-for="question" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Iteration_Response" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input asp-for="Iteration_Response" class="form-control" />
+                    <span asp-validation-for="Iteration_Response" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review_Score_Iteration" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input asp-for="Review_Score_Iteration" class="form-control" />
+                    <span asp-validation-for="Review_Score_Iteration" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Winning_Response" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input asp-for="Winning_Response" class="form-control" />
+                    <span asp-validation-for="Winning_Response" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review_Score_Winning_Company" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input asp-for="Review_Score_Winning_Company" class="form-control" />
+                    <span asp-validation-for="Review_Score_Winning_Company" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input asp-for="Note" class="form-control" />
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProcurementID" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <select asp-for="ProcurementID" class="form-control" asp-items="Model.Procurements"></select>
+                    <span asp-validation-for="ProcurementID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="QuestionTypeID" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <select asp-for="QuestionTypeID" class="form-control" asp-items="Model.QuestionTypes"></select>
+
+
+
+                    <span asp-validation-for="QuestionTypeID" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3">
+                    @*<a asp-controller="QuestionTypes" asp-action="Create" class="btn btn-success">Add Question Type</a>*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Files" class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <input type="file" asp-for="Files" name="Files" id="Files" multiple />
+
+                    <span asp-validation-for="Files" class="text-danger"></span>
+                </div>
+                @*<a href="@Model.FileUrl" title="View Current Document"><i class="glyphicon glyphicon-eye-open"></i></a>*@
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a asp-controller="Questions" asp-action="Index" class="btn btn-success">Cancel</a>
+                    <input type="submit" value="Save Changes" class="btn btn-success" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>

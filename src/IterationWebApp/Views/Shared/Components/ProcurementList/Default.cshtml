@@ -1,0 +1,99 @@
+﻿@model List<DisplayProcurementViewModel>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-info">Recently Added Procurements</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-responsive table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink("Service Procured", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Service_Procured", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                        @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Response_Evaluation" || ViewBag.SortBy == "Date_Of_Submission")
+                        {
+                            <i class="glyphicon glyphicon-sort"></i>
+                        }
+
+                        @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Service_Procured")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                        @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Service_Procured")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                    </th>
+                    <th>
+                        @Html.ActionLink("Response Evaluation", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Response_Evaluation", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                        @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Date_Of_Submission")
+                        {
+                            <i class="glyphicon glyphicon-sort"></i>
+                        }
+
+                        @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Response_Evaluation")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                        @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Response_Evaluation")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                                    @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                    </th>
+                    <th>Company</th>
+                    <th>Corporate Number</th>
+                    <th>Note</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a  class="btn btn-link" asp-route-id="@item.Procurement_Id" asp-action="Detail" asp-controller="Procurements">@item.Service_Procured</a></td>
+                    <td>@item.Response_Evaluation</td>
+                    
+                    <td>@item.CompanyName</td>
+                    <td>@item.CorporateNumber</td>
+                    <td>@item.Note</td>
+                    <td>@item.Date_Of_Submission</td>
+                    <td>
+                        <a class="btn btn-sm btn-success" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                        <a class="btn btn-sm btn-success" title="Delete"><i class="fa fa-trash-o"></i></a>
+                    </td>
+
+                </tr>
+
+            }
+        </table>
+    </div>
+
+</div>
+<!--Bootstrap Modal window-->
+@*<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="detailPro">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                @foreach (var item in Model)
+                {
+                    @Component.Invoke("ProcurementDetail", item.Procurement_Id)
+
+                }
+
+            </div>
+           
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->*@

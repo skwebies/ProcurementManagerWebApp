@@ -1,0 +1,13 @@
+﻿@model SearchStringViewModel
+
+<div class="row">
+    <div class="col-sm-6">
+        <form asp-controller="Procurement" asp-action="Index" method="get">
+            <input asp-for="keyword"  type="search" />
+            <input type="submit" value="Search"/>
+            </form>
+    </div>
+</div>
+
+
+

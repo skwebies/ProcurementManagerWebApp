@@ -1,0 +1,261 @@
+﻿<!--Home Page Contents-->
+@model IEnumerable<Procurement>
+
+@{
+    ViewBag.Title = "Iteration AB - Home";
+}
+
+@*@model List<DisplayProcurementViewModel>*@
+<div class="row button-nav">
+    <div class="col-md-6 pull-right">
+        <a asp-action="Create" asp-controller="Procurements" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Procurement</a>
+        <a asp-action="Create" asp-controller="Questions" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Question</a>
+        <a data-toggle="modal" data-target="#CreateQtype" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Question Type</a>
+        @*<a data-ajax="true" data-toggle="modal" data-target="#UserRegister" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-user"></i> Create Account</a>*@
+    </div>
+
+</div>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-info">Recently Added Procurements</h3>
+
+    </div>
+    <div class="panel-body">
+        <table class="table table-responsive table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink("Service Procured", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Service_Procured", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                        @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Response_Evaluation" || ViewBag.SortBy == "Date_Of_Submission")
+                        {
+                            <i class="glyphicon glyphicon-sort"></i>
+                        }
+
+                        @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Service_Procured")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                        @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Service_Procured")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                    </th>
+                    <th class="visible-lg visible-md">
+                        @Html.ActionLink("Response Evaluation", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Response_Evaluation", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                        @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Date_Of_Submission")
+                        {
+                            <i class="glyphicon glyphicon-sort"></i>
+                        }
+
+                        @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Response_Evaluation")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                        @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Response_Evaluation")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                    </th>
+                    <th class="visible-lg">
+                        @Html.ActionLink("Company", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Company_Name", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                        @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Response_Evaluation" || ViewBag.SortBy == "Date_Of_Submission")
+                        {
+                            <i class="glyphicon glyphicon-sort"></i>
+                        }
+
+                        @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Company_Name")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                        @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Company_Name")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                    </th>
+                    <th class="visible-lg">
+                        @Html.ActionLink("Corporate No.", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Corporate_Number", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                        @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Response_Evaluation" || ViewBag.SortBy == "Date_Of_Submission" || ViewBag.SortBy == "Company_Name")
+                        {
+                            <i class="glyphicon glyphicon-sort"></i>
+                        }
+
+                        @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Corporate_Number")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                        @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Corporate_Number")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                    </th>
+                    <th class="visible-lg">Note</th>
+                    <th class="visible-lg">
+                        @Html.ActionLink("Date", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), SortBy = "Date_Of_Submission", Page = (ViewBag.Page == null ? "1" : ViewBag.Page) })
+                        @if (ViewBag.SortOrder == null || ViewBag.SortBy == "Company_Name" || ViewBag.SortBy == "Service_Procured" || ViewBag.SortBy == "Response_Evaluation")
+                        {
+                            <i class="glyphicon glyphicon-sort"></i>
+                        }
+
+                        @if (ViewBag.SortOrder == "Asc" && ViewBag.SortBy == "Date_Of_Submission")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                        @if (ViewBag.SortOrder == "Desc" && ViewBag.SortBy == "Date_Of_Submission")
+                        {
+                            <i class="glyphicon glyphicon-sort-by-alphabet-alt" style="color:red"></i>
+                            @*<i class="glyphicon glyphicon-sort hidden"></i>*@
+                        }
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a class="btn btn-link" asp-route-id="@item.Procurement_Id" asp-action="Detail" asp-controller="Procurements">@item.Service_Procured</a></td>
+                    <td class="visible-md visible-lg">@item.Response_Evaluation</td>
+
+                    <td class="visible-lg">@item.Company.Company_Name</td>
+                    <td class="visible-lg">@item.Company.Corporate_Number</td>
+                    <td class="visible-lg">@item.Note</td>
+                    <td class="visible-lg">
+                        
+                        @if (item.ModifiedDate == null)
+                        {
+                            <p>
+                                <span class="text-info">Published On:</span>
+                                @item.PublishedDate
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <span class="text-success">Modified On:</span>
+                                @item.ModifiedDate
+                            </p>
+
+                        }
+
+                    </td>
+                    
+                    <td>
+
+                        <a asp-action="DeleteProcurement" asp-controller="Procurements" asp-route-id="@item.Procurement_Id" data-toggle="modal" data-target="#DeletePro" data-rel="dialog" class="btn btn-sm btn-success" title="Delete"><i class="fa fa-trash-o"></i></a>
+                        <a asp-controller="Procurements" asp-action="Edit" asp-route-id="@item.Procurement_Id" class="btn btn-sm btn-success" data-toggle="modal" data-target="#EditPro" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                    </td>
+
+
+                </tr>
+
+            }
+        </table>
+    </div>
+    <!--Partial View Generation For DeleteProcurement-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="DeletePro" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+
+                </div>
+
+            </div>
+
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+    <!--Partial View Generation For Edit Procurement-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="EditPro" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+
+                </div>
+
+            </div>
+
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+
+
+</div>
+
+<!--Pagination Starts-->
+<nav>
+    <ul class="pagination">
+        <li>
+            @if (ViewBag.HasPreviousPage == true)
+            {
+
+                <a href="@Url.Action("Index", new { Page = ViewBag.PreviousPage })" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            }
+
+
+        </li>
+        @{
+            double totalPages = ViewBag.TotalPages;
+
+        }
+        @for (int i = 1; i < totalPages; i++)
+        {
+
+            <li>@Html.ActionLink(i.ToString() + " ", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder), SortBy = (ViewBag.SortBy == null ? "Company_Name" : ViewBag.SortBy), Page = i })</li>
+
+
+        }
+
+        <li>
+            @if (ViewBag.HasNextPage == true)
+            {
+                <a href="@Url.Action("Index", new { Page = ViewBag.NextPage })" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            }
+        </li>
+    </ul>
+</nav>
+
+<div class="modal fade" id="CreateQtype" tabindex="-1" role="dialog" aria-labelledby="createQtype" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createQtype">Add Question Type</h4>
+            </div>
+            <div class="modal-body">
+
+                @{
+                    await Html.RenderPartialAsync("_AddQuestionType", new CreateQuestionTypeViewModel());
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

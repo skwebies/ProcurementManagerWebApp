@@ -1,0 +1,13 @@
+﻿@model RegisterUserViewModel
+
+@{
+    ViewBag.Title = "Create Account";
+} 
+
+<div class="col-sm-12">
+    @if (TempData["error"] != null)
+    {
+        <h3 class="text-warning"><span class="text-success">@TempData["error"]</span></h3>
+
+    }
+</div>

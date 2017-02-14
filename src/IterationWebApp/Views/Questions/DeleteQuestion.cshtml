@@ -1,0 +1,15 @@
+﻿@model Question
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@{
+    await Html.RenderPartialAsync("_DeleteQuestion", Model);
+}
+
+
+

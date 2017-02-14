@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Company>
+
+
+ 
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Corporate Number</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Company_Name</td>
+                    <td>@item.Corporate_Number</td>
+                </tr>
+
+
+            }
+        </table>
+

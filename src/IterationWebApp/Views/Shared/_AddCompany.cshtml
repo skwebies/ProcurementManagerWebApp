@@ -1,0 +1,28 @@
+﻿@model CreateCompanyViewModel
+
+
+
+<form asp-controller="Companies" asp-action="Create" class="form-horizontal">
+    <div class="form-group">
+        <label asp-for="CompanyName" class="col-sm-4 control-label"></label>
+        <div class="col-sm-5">
+            <input asp-for="CompanyName" class="form-control" /><br />
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="CorporateNumber" class="col-sm-4 control-label"></label>
+        <div class="col-sm-5">
+            <input asp-for="CorporateNumber" class="form-control" />
+            <span asp-validation-for="CorporateNumber" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="Add" class="btn btn-success" />
+        </div>
+    </div>
+
+</form>
+
+

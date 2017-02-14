@@ -1,0 +1,21 @@
+﻿@model CreateQuestionTypeViewModel
+
+
+<form asp-controller="QuestionTypes" asp-action="Create" class="form-horizontal">
+    <div class="form-group">
+        <label asp-for="Question_Type" class="col-sm-4 control-label"></label>
+        <div class="col-sm-5">
+            <input asp-for="Question_Type" class="form-control" /><br />
+            <span asp-validation-for="Question_Type" class="text-danger"></span>
+        </div>
+    </div>
+   
+    <div class="modal-footer">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="Add" class="btn btn-success" />
+        </div>
+    </div>
+
+</form>
+
+

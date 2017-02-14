@@ -1,0 +1,77 @@
+﻿@model DisplayProcurementViewModel
+@{
+    ViewBag.Title = "Iteration AB - Procurement Details";
+}
+<div class="row">
+    <div class="col-md-4">
+
+        <h2 class="page-header">Procurement Details</h2>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row detail_records">
+
+            <div class="col-md-3 text-right text-success"><strong>Procurement:</strong></div>
+            <div class="col-md-3 text-left">@Model.Service_Procured</div>
+        </div>
+        <div class="row detail_records">
+            <div class="col-md-3 text-right text-success"><strong> Evaluation:</strong></div>
+            <div class="col-md-3 text-left">@Model.Response_Evaluation</div>
+        </div>
+        <div class="row detail_records">
+            <div class="col-md-3 text-right text-success"><strong>Date of Submission:</strong></div>
+            <div class="col-md-3 text-left">@Model.Date_Of_Submission</div>
+        </div>
+        <div class="row detail_records">
+            <div class="col-md-3 text-right text-success"><strong>Company:</strong></div>
+            <div class="col-md-3 text-left">@Model.CompanyName</div>
+        </div>
+        <div class="row detail_records">
+            <div class="col-md-3 text-right text-success"><strong>Note:</strong></div>
+            <div class="col-md-3 text-left">@Model.Note</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pull-right">
+        @foreach (var item in Model.Questions)
+            {
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="Qload">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@item.Question_Id" aria-expanded="true" aria-controls="Qcol">
+                                View Question No. @item.Question_Number
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="@item.Question_Id" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="Qload">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <strong>Question: <span class="text-success">@item.question</span></strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Question Type: <span class="text-success">@item.QuestionType.Question_Type</span></strong>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+
+    </div>
+
+
+
+</div>
+<div class="row">
+
+</div>

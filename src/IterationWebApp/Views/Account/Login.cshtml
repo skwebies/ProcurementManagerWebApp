@@ -1,0 +1,64 @@
+﻿@model LoginUserViewModel
+
+@{
+    ViewBag.Title = "Login Page";
+} 
+
+
+
+<div class="container-fluid cust_container">
+
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-5">
+            <a asp-controller="Home" asp-action="Index">
+               
+                <img src="~/images/iteration_logo.png" class="login_logo" />
+            </a>
+
+            <h4 class="login_header">Account Login</h4>
+        </div>
+       
+
+        <div class="col-lg-7 col-lg-offset-3">
+            
+
+            <form asp-controller="Account" asp-action="Login" asp-route-returnUrl ="@Model.ReturnUrl" class="form-horizontal" asp-antiforgery="true">
+                <div class="form-group">
+                    <div asp-validation-summary="ValidationSummary.ModelOnly" class="col-sm-4 col-sm-offset-3 text-danger"></div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-4">
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-4">
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+                    
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <label asp-for="RememberMe" class="col-sm-3 control-label">
+                            Remember me
+                            <input type="checkbox" asp-for="RememberMe" />
+                        </label>
+                        <span asp-validation-for="RememberMe" class="validation_error"></span>
+                        <input type="submit" value="Login" class="btn btn-success login-btn" />
+                       
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

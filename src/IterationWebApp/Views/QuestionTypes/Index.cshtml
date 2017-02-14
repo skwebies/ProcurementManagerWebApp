@@ -1,0 +1,41 @@
+﻿@model IEnumerable<QuestionType>
+<div class="row">
+    <div class="col-md-4">
+        <p class="text-left page-header text-uppercase" style="font-size:28px;">Question Types  <a data-toggle="modal" data-target="#CreateQtype" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-plus"></i> Add Question Type</a></p>
+        
+    </div>
+    
+</div>
+    <div class="list-group col-md-6">
+        @foreach (var item in Model)
+        {
+            <div class="list-group-item col-md-3">@item.Question_Type</div>
+
+            <div class="list-group-item col-md-1">
+
+                <a asp-action="Delete" asp-controller="QuestionTypes" asp-route-id="@item.Question_Type_Id" class="text-center"><i class="glyphicon glyphicon-trash"></i></a>
+
+            </div>
+
+
+        }
+    </div>
+
+<div class="modal fade" id="CreateQtype" tabindex="-1" role="dialog" aria-labelledby="createQtype" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createQtype">Add Question Type</h4>
+            </div>
+            <div class="modal-body">
+
+                @{
+                    await Html.RenderPartialAsync("_AddQuestionType", new CreateQuestionTypeViewModel());
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
